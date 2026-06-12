@@ -1,4 +1,9 @@
-**Theorem.** The set of natural numbers that equal the sum of the factorials of their decimal digits is exactly $\{1, 2, 145, 40585\}$. That is, defining $f(n) = \sum_{d \,\in\, \text{digits}(n)} d!$, where $\text{digits}(n)$ denotes the multiset of base-$10$ digits of $n$, we have
-$$\{ n \in \mathbb{N} \mid n = f(n) \} = \{1, 2, 145, 40585\}.$$
+**Theorem.** The set of natural numbers equal to the sum of the factorials of their own digits is exactly $\{1, 2, 145, 40585\}$. That is,
+$$\{\, n \in \mathbb{N} \mid n = \sigma(n) \,\} = \{1,\, 2,\, 145,\, 40585\},$$
+where $\sigma(n)$ denotes the digit-factorial sum of $n$.
 
-*Proof.* Unsolved.
+*Proof.* We show the two sets are equal by proving mutual inclusion.
+
+$(\subseteq)$ Let $n \in \mathbb{N}$ satisfy $n = \sigma(n)$. By \textbf{Upper Bound}, every fixed point of $\sigma$ satisfies $n \leq 2{,}540{,}160$. Since $n$ is bounded, \textbf{Finite Verification} applies and confirms that among all $n \leq 2{,}540{,}160$, the only solutions to $n = \sigma(n)$ are $1, 2, 145$, and $40585$. Hence $n \in \{1, 2, 145, 40585\}$.
+
+$(\supseteq)$ Conversely, let $n \in \{1, 2, 145, 40585\}$. Each of these values trivially satisfies $n \leq 2{,}540{,}160$, so \textbf{Finite Verification} applies in the reverse direction, yielding $n = \sigma(n)$ for each element by direct computation. $\blacksquare$
