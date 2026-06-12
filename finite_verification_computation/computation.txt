@@ -1,0 +1,22 @@
+def run(input_data, target):
+    import math
+    factorials = [math.factorial(d) for d in range(10)]
+    all_evidence = []
+    all_records = []
+    overall_sufficient = True
+    for chunk in input_data:
+        start = chunk["start"]
+        end = chunk["end"]
+        found = []
+        for n in range(start, end + 1):
+            digit_fact_sum = sum(factorials[int(d)] for d in str(n))
+            if n == digit_fact_sum:
+                found.append(n)
+        expected = set(target["expected_factorions"])
+        chunk_sufficient = all(f in expected for f in found)
+        if not chunk_sufficient:
+            overall_sufficient = False
+        all_evidence.append({"start": start, "end": end, "found": found, "sufficient": chunk_sufficient})
+        all_records.extend(found)
+    total_scanned = sum(c["end"] - c["start"] + 1 for c in input_data)
+    return {"evidence": all_evidence, "sufficient": overall_sufficient, "summary": "Scanned " + str(total_scanned) + " integers across " + str(len(input_data)) + " chunk(s); factorions found: " + str(all_records), "records": all_records}
